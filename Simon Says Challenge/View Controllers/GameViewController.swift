@@ -12,6 +12,9 @@ class GameViewController: UIViewController {
     // MARK: - Properties
     
     var patternController = PatternController()
+    var colorButtons: [Color: UIButton]?
+    var timer: Timer?
+    var nextColorIndex = 0
     
     // MARK: - Outlets
     
@@ -31,6 +34,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
+        collectButtons()
     }
     
     // MARK: - Actions
@@ -56,16 +60,38 @@ class GameViewController: UIViewController {
     
     private func startGame() {
         patternController.addNextColor()
-        displayPattern()
+        nextColorIndex = 0
+        timer = Timer.scheduledTimer(timeInterval: 0.6,
+                                     target: self,
+                                     selector: #selector(tryToAnimate),
+                                     userInfo: nil,
+                                     repeats: true)
     }
     
-    private func displayPattern() {
-        // TODO: - For each color in the pattern, make animation for corresponding color button
+    // Animate the next color button if the colorIndex hasn't reached the end
+    // of the pattern array
+    @objc private func tryToAnimate() {
+        guard let colorButtons = colorButtons else { return }
         
-        print("DEBUG: Pattern:\n \(patternController.pattern)")
+        if nextColorIndex <= patternController.pattern.count - 1 {
+            let color = patternController.pattern[nextColorIndex]
+            colorButtons[color]?.flash()
+            nextColorIndex += 1
+        } else {
+            timer?.invalidate()
+        }
     }
     
     // MARK: - Helper Methods
+    
+    // Save all color buttons inside dictionary
+    private func collectButtons() {
+        colorButtons = [.red : redButton,
+                        .blue : blueButton,
+                        .purple : purpleButton,
+                        .yellow : yellowButton
+        ]
+    }
     
     private func updateViews() {
         gameOverLabel.alpha = 0
