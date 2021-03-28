@@ -26,6 +26,7 @@ class GameViewController: UIViewController {
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateViews()
     }
     
     // MARK: - Actions
@@ -44,5 +45,12 @@ class GameViewController: UIViewController {
     @IBAction func startButtonTapped(_ sender: UIButton) {
     }
     @IBAction func tryAgainButtonTapped(_ sender: UIButton) {
+    }
+    
+    // MARK: - Methods
+    
+    private func updateViews() {
+        gameOverLabel.alpha = 0
+        tryAgainButton.isHidden = true
     }
 }
