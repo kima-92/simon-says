@@ -1,8 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d5I-gv-2nf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Game View Controller-->
+        <scene sceneID="Rre-KO-oPV">
+            <objects>
+                <viewController id="d5I-gv-2nf" customClass="GameViewController" customModule="Simon_Says_Challenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iaf-oF-Dhi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="D1b-Gv-LIE">
+                                <rect key="frame" x="30" y="194" width="354" height="354"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dLv-ZU-0gO">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="172"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKu-mZ-Nhh">
+                                                <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <connections>
+                                                    <action selector="redButtonTapped:" destination="d5I-gv-2nf" eventType="touchUpInside" id="OdU-ae-SbS"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXT-9W-zsA">
+                                                <rect key="frame" x="182" y="0.0" width="172" height="172"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                <connections>
+                                                    <action selector="blueButtonTapped:" destination="d5I-gv-2nf" eventType="touchUpInside" id="MmZ-aX-hQt"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1mp-SL-xuP">
+                                        <rect key="frame" x="0.0" y="182" width="354" height="172"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wco-yE-QsV">
+                                                <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
+                                                <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                                <connections>
+                                                    <action selector="purpleButtonTapped:" destination="d5I-gv-2nf" eventType="touchUpInside" id="vNq-kk-lAH"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3b5-aJ-dbj">
+                                                <rect key="frame" x="182" y="0.0" width="172" height="172"/>
+                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <connections>
+                                                    <action selector="yellowButtonTapped:" destination="d5I-gv-2nf" eventType="touchUpInside" id="31D-Zi-4Dz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="D1b-Gv-LIE" secondAttribute="height" multiplier="1:1" id="YhZ-jk-J4y"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="BJq-w9-wjW">
+                                <rect key="frame" x="92.5" y="718" width="229" height="114"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-Sv-bdh">
+                                        <rect key="frame" x="0.0" y="0.0" width="229" height="54"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hr-2m-eHs">
+                                        <rect key="frame" x="0.0" y="84" width="229" height="30"/>
+                                        <state key="normal" title="Try Again"/>
+                                        <connections>
+                                            <action selector="tryAgainButtonTapped:" destination="d5I-gv-2nf" eventType="touchUpInside" id="Ilu-dG-wHL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhS-oR-cIY">
+                                <rect key="frame" x="289.5" y="74" width="94.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwo-Gd-DC3">
+                                <rect key="frame" x="166" y="608" width="82" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="startButtonTapped:" destination="d5I-gv-2nf" eventType="touchUpInside" id="nGY-7r-fCB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="B7S-eW-PKx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ZhS-oR-cIY" firstAttribute="top" secondItem="B7S-eW-PKx" secondAttribute="top" constant="30" id="Nz8-1L-mrx"/>
+                            <constraint firstItem="B7S-eW-PKx" firstAttribute="bottom" secondItem="BJq-w9-wjW" secondAttribute="bottom" constant="30" id="OEc-z0-Vb8"/>
+                            <constraint firstItem="cwo-Gd-DC3" firstAttribute="centerX" secondItem="iaf-oF-Dhi" secondAttribute="centerX" id="SBS-9e-0LG"/>
+                            <constraint firstItem="B7S-eW-PKx" firstAttribute="trailing" secondItem="ZhS-oR-cIY" secondAttribute="trailing" constant="30" id="T4p-jp-R52"/>
+                            <constraint firstItem="D1b-Gv-LIE" firstAttribute="leading" secondItem="B7S-eW-PKx" secondAttribute="leading" constant="30" id="V8s-Qu-G2J"/>
+                            <constraint firstItem="BJq-w9-wjW" firstAttribute="centerX" secondItem="iaf-oF-Dhi" secondAttribute="centerX" id="YYB-0c-8OE"/>
+                            <constraint firstItem="BJq-w9-wjW" firstAttribute="top" secondItem="cwo-Gd-DC3" secondAttribute="bottom" constant="50" id="bit-vD-gbe"/>
+                            <constraint firstItem="cwo-Gd-DC3" firstAttribute="top" secondItem="D1b-Gv-LIE" secondAttribute="bottom" constant="60" id="mh4-fl-eMN"/>
+                            <constraint firstItem="B7S-eW-PKx" firstAttribute="trailing" secondItem="D1b-Gv-LIE" secondAttribute="trailing" constant="30" id="nhh-gy-xeW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="blueButton" destination="hXT-9W-zsA" id="MF6-0a-oXH"/>
+                        <outlet property="gameOverLabel" destination="JEa-Sv-bdh" id="WmD-Fc-tWh"/>
+                        <outlet property="purpleButton" destination="wco-yE-QsV" id="YJA-Vu-xkP"/>
+                        <outlet property="redButton" destination="HKu-mZ-Nhh" id="3Vt-TK-UNK"/>
+                        <outlet property="scoreLabel" destination="ZhS-oR-cIY" id="Nmb-BH-fnx"/>
+                        <outlet property="startButton" destination="cwo-Gd-DC3" id="uMf-DW-WsB"/>
+                        <outlet property="tryAgainButton" destination="3hr-2m-eHs" id="Hgt-OE-zHF"/>
+                        <outlet property="yellowButton" destination="3b5-aJ-dbj" id="Yzc-ur-BL2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TpZ-5Y-IAg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-17.39130434782609" y="4.6875"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
