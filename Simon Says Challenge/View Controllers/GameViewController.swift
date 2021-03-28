@@ -9,6 +9,10 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var patternController = PatternController()
+    
     // MARK: - Outlets
     
     // Labels
@@ -43,11 +47,25 @@ class GameViewController: UIViewController {
     
     // Game Buttons
     @IBAction func startButtonTapped(_ sender: UIButton) {
+        startGame()
     }
     @IBAction func tryAgainButtonTapped(_ sender: UIButton) {
     }
     
-    // MARK: - Methods
+    // MARK: - Game Methods
+    
+    private func startGame() {
+        patternController.addNextColor()
+        displayPattern()
+    }
+    
+    private func displayPattern() {
+        // TODO: - For each color in the pattern, make animation for corresponding color button
+        
+        print("DEBUG: Pattern:\n \(patternController.pattern)")
+    }
+    
+    // MARK: - Helper Methods
     
     private func updateViews() {
         gameOverLabel.alpha = 0
