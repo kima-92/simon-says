@@ -80,6 +80,7 @@ class GameViewController: UIViewController {
     
     private func displayPattern() {
         patternController.addNextColor()
+        enableColorButtons(enabled: false)
         timer = Timer.scheduledTimer(timeInterval: 0.6,
                                      target: self,
                                      selector: #selector(tryToAnimateButton),
@@ -96,7 +97,10 @@ class GameViewController: UIViewController {
                let button = colorButtons[color] {
                 button.flash()
             }
-        } else { timer?.invalidate() }
+        } else {
+            enableColorButtons()
+            timer?.invalidate()
+        }
     }
     
     // Check if the player continues playing, if they finished the pattern, or if they lost
