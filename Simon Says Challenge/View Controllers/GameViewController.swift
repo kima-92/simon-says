@@ -101,8 +101,8 @@ class GameViewController: UIViewController {
         
         // Continue or stop game
         if patternController.isIncorrect(color: color) {
-            // TODO: - Game Over
-            print("DEBUG: \nGame Over\n")
+            
+            patternController.resetGame()
             tryAgainButton.isHidden = false
             gameOverLabel.alpha = 1
             enableColorButtons(enabled: false)

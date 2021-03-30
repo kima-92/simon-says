@@ -17,6 +17,12 @@ class PatternController {
     
     // MARK: - Game Methods
     
+    func resetGame() {
+        pattern = []
+        nextColorIndex = 0
+        nextColor = nil
+    }
+    
     // Check if this is the next color in the pattern
     func isIncorrect(color: Color) -> Bool {
         if pattern[nextColorIndex] != color {
