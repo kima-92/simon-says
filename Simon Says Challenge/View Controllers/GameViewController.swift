@@ -61,6 +61,7 @@ class GameViewController: UIViewController {
         startGame()
     }
     @IBAction func tryAgainButtonTapped(_ sender: UIButton) {
+        startGame()
     }
     
     // MARK: - Game Methods
@@ -68,6 +69,9 @@ class GameViewController: UIViewController {
     private func startGame() {
         patternController.addNextColor()
         startButton.isHidden = true
+        tryAgainButton.isHidden = true
+        gameOverLabel.alpha = 0
+        enableColorButtons()
         
         timer = Timer.scheduledTimer(timeInterval: 0.6,
                                      target: self,
@@ -99,7 +103,10 @@ class GameViewController: UIViewController {
         if patternController.isIncorrect(color: color) {
             // TODO: - Game Over
             print("DEBUG: \nGame Over\n")
-            startButton.isHidden = false
+            tryAgainButton.isHidden = false
+            gameOverLabel.alpha = 1
+            enableColorButtons(enabled: false)
+            return
         }
         if patternController.isLast(color: color) { startGame() }
     }
@@ -115,8 +122,17 @@ class GameViewController: UIViewController {
         ]
     }
     
+    private func enableColorButtons(enabled isEnabled: Bool = true) {
+        redButton.isEnabled = isEnabled
+        blueButton.isEnabled = isEnabled
+        purpleButton.isEnabled = isEnabled
+        yellowButton.isEnabled = isEnabled
+    }
+    
     private func updateViews() {
         gameOverLabel.alpha = 0
         tryAgainButton.isHidden = true
+        
+        enableColorButtons(enabled: false)
     }
 }
