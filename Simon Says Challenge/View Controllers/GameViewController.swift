@@ -69,7 +69,8 @@ class GameViewController: UIViewController {
     
     private func startGame() {
         startButton.isHidden = true
-        tryAgainButton.isHidden = true
+        tryAgainButton.isEnabled = false
+        tryAgainButton.alpha = 0
         gameOverLabel.alpha = 0
         
         score += 0
@@ -114,7 +115,8 @@ class GameViewController: UIViewController {
         if patternController.isIncorrect(color: color) {
             
             patternController.resetGame()
-            tryAgainButton.isHidden = false
+            tryAgainButton.isEnabled = true
+            tryAgainButton.alpha = 1
             gameOverLabel.alpha = 1
             enableColorButtons(enabled: false)
             score = 0
@@ -129,7 +131,6 @@ class GameViewController: UIViewController {
     
     // MARK: - Helper Methods
     
-    // Save all color buttons inside dictionary
     private func collectButtons() {
         colorButtons = [.red : redButton,
                         .blue : blueButton,
@@ -147,10 +148,15 @@ class GameViewController: UIViewController {
     
     private func updateViews() {
         gameOverLabel.alpha = 0
-        tryAgainButton.isHidden = true
+        tryAgainButton.isEnabled = false
+        tryAgainButton.alpha = 0
         score = 0
         scoreLabel.text = "Score: \(score)"
         
         enableColorButtons(enabled: false)
+        redButton.layer.cornerRadius = 5
+        blueButton.layer.cornerRadius = 5
+        purpleButton.layer.cornerRadius = 5
+        yellowButton.layer.cornerRadius = 5
     }
 }
