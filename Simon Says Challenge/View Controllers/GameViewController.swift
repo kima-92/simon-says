@@ -14,6 +14,7 @@ class GameViewController: UIViewController {
     var patternController = PatternController()
     var colorButtons: [Color: UIButton]?
     var timer: Timer?
+    var score: Int = 0
     
     // MARK: - Outlets
     
@@ -67,12 +68,18 @@ class GameViewController: UIViewController {
     // MARK: - Game Methods
     
     private func startGame() {
-        patternController.addNextColor()
         startButton.isHidden = true
         tryAgainButton.isHidden = true
         gameOverLabel.alpha = 0
-        enableColorButtons()
         
+        score += 0
+        scoreLabel.text = "Score: \(score)"
+        enableColorButtons()
+        displayPattern()
+    }
+    
+    private func displayPattern() {
+        patternController.addNextColor()
         timer = Timer.scheduledTimer(timeInterval: 0.6,
                                      target: self,
                                      selector: #selector(tryToAnimateButton),
@@ -106,9 +113,14 @@ class GameViewController: UIViewController {
             tryAgainButton.isHidden = false
             gameOverLabel.alpha = 1
             enableColorButtons(enabled: false)
+            score = 0
             return
         }
-        if patternController.isLast(color: color) { startGame() }
+        if patternController.isLast(color: color) {
+            score += 15
+            scoreLabel.text = "Score: \(score)"
+            displayPattern()
+        }
     }
     
     // MARK: - Helper Methods
@@ -132,6 +144,8 @@ class GameViewController: UIViewController {
     private func updateViews() {
         gameOverLabel.alpha = 0
         tryAgainButton.isHidden = true
+        score = 0
+        scoreLabel.text = "Score: \(score)"
         
         enableColorButtons(enabled: false)
     }
