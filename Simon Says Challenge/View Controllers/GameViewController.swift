@@ -41,12 +41,20 @@ class GameViewController: UIViewController {
     
     // Color Buttons
     @IBAction func redButtonTapped(_ sender: UIButton) {
+        redButton.flash()
+        checkIfCorrect(colorButton: sender)
     }
     @IBAction func blueButtonTapped(_ sender: UIButton) {
+        blueButton.flash()
+        checkIfCorrect(colorButton: sender)
     }
     @IBAction func purpleButtonTapped(_ sender: UIButton) {
+        purpleButton.flash()
+        checkIfCorrect(colorButton: sender)
     }
     @IBAction func yellowButtonTapped(_ sender: UIButton) {
+        yellowButton.flash()
+        checkIfCorrect(colorButton: sender)
     }
     
     // Game Buttons
@@ -61,6 +69,8 @@ class GameViewController: UIViewController {
     private func startGame() {
         patternController.addNextColor()
         nextColorIndex = 0
+        startButton.isHidden = true
+        
         timer = Timer.scheduledTimer(timeInterval: 0.6,
                                      target: self,
                                      selector: #selector(tryToAnimate),
@@ -79,7 +89,24 @@ class GameViewController: UIViewController {
             nextColorIndex += 1
         } else {
             timer?.invalidate()
+            nextColorIndex = 0
         }
+    }
+    
+    // Check if the player continues playing, if they finished the pattern, or if they lost
+    private func checkIfCorrect(colorButton: UIButton) {
+        
+        // Player's chosen color
+        guard let colorElement = colorButtons?.filter({ $0.value == colorButton }),
+              let color = colorElement.first?.key else { return }
+        
+        // Continue or stop game
+        if patternController.isIncorrect(color: color) {
+            // TODO: - Game Over
+            print("DEBUG: \nGame Over\n")
+            startButton.isHidden = false
+        }
+        if patternController.isLast(color: color) { startGame() }
     }
     
     // MARK: - Helper Methods

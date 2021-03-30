@@ -12,9 +12,27 @@ class PatternController {
     // MARK: - Properties
     
     var pattern: [Color] = []
+    var nextColorIndex = 0
     
     // MARK: - Game Methods
     
+    // Check if this is the next color in the pattern
+    func isIncorrect(color: Color) -> Bool {
+        if pattern[nextColorIndex] != color { return true }
+        return false
+    }
+    
+    // Check if this is the last color in the pattern
+    func isLast(color: Color) -> Bool {
+        if nextColorIndex == pattern.count - 1 {
+            nextColorIndex = 0
+            return true
+        }
+        nextColorIndex += 1
+        return false
+    }
+    
+    // Add the next color to the pattern
     func addNextColor() {
         let randomNumber = Int.random(in: 0...100)
         
