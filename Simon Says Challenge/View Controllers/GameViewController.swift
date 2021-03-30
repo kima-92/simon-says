@@ -14,7 +14,6 @@ class GameViewController: UIViewController {
     var patternController = PatternController()
     var colorButtons: [Color: UIButton]?
     var timer: Timer?
-    var nextColorIndex = 0
     
     // MARK: - Outlets
     
@@ -68,29 +67,25 @@ class GameViewController: UIViewController {
     
     private func startGame() {
         patternController.addNextColor()
-        nextColorIndex = 0
         startButton.isHidden = true
         
         timer = Timer.scheduledTimer(timeInterval: 0.6,
                                      target: self,
-                                     selector: #selector(tryToAnimate),
+                                     selector: #selector(tryToAnimateButton),
                                      userInfo: nil,
                                      repeats: true)
     }
     
-    // Animate the next color button if the colorIndex hasn't reached the end
-    // of the pattern array
-    @objc private func tryToAnimate() {
+    // Try to animate the next color's button
+    @objc private func tryToAnimateButton() {
         guard let colorButtons = colorButtons else { return }
         
-        if nextColorIndex <= patternController.pattern.count - 1 {
-            let color = patternController.pattern[nextColorIndex]
-            colorButtons[color]?.flash()
-            nextColorIndex += 1
-        } else {
-            timer?.invalidate()
-            nextColorIndex = 0
-        }
+        if patternController.canDisplayNextColor() {
+            if let color = patternController.nextColor,
+               let button = colorButtons[color] {
+                button.flash()
+            }
+        } else { timer?.invalidate() }
     }
     
     // Check if the player continues playing, if they finished the pattern, or if they lost

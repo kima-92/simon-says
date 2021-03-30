@@ -13,12 +13,16 @@ class PatternController {
     
     var pattern: [Color] = []
     var nextColorIndex = 0
+    var nextColor: Color?
     
     // MARK: - Game Methods
     
     // Check if this is the next color in the pattern
     func isIncorrect(color: Color) -> Bool {
-        if pattern[nextColorIndex] != color { return true }
+        if pattern[nextColorIndex] != color {
+            nextColorIndex = 0
+            return true
+        }
         return false
     }
     
@@ -29,6 +33,18 @@ class PatternController {
             return true
         }
         nextColorIndex += 1
+        return false
+    }
+    
+    // Update index based on wether there's a next color
+    func canDisplayNextColor() -> Bool {
+        if nextColorIndex < pattern.count {
+            nextColor = pattern[nextColorIndex]
+            nextColorIndex += 1
+            return true
+        }
+        nextColor = nil
+        nextColorIndex = 0
         return false
     }
     
